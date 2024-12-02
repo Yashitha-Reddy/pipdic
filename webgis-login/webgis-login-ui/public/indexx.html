@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesium 3D Tileset Viewer</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.102/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.102/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    
+    <style>
+        #cesiumContainer {
+            width: 100%; 
+            height: 100%; 
+            margin: 0; 
+            padding: 0;
+            overflow: hidden;
+        }
+        #toolbar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            background-color: rgba(42, 42, 42, 0.8);
+            padding: 10px;
+            border-radius: 4px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    <div id="toolbar">
+        <button id="startMeasurement">Start Measurement</button>
+        <button id="clearMeasurement">Clear Measurement</button>
+        <div id="measurementResult"></div>
+    </div>
+    <script>
+        // Set the Cesium Ion access token
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1MjVlNTE4ZS00YmExLTQ1ZjItYjExNy0wODVlODI2ZjQ2ZDciLCJpZCI6MjQ5MjczLCJpYXQiOjE3Mjk2NzM5OTR9.mtXI4a0unCNeQYTEUsdFk5ZAvpcVwFx5cIExLkzdV_o';
+
+        // Initialize the Cesium viewer
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            terrainProvider: Cesium.createWorldTerrain(),
+            imageryProvider: Cesium.createWorldImagery()
+        });
+
+        // Load the 3D tileset
+        const tileset = new Cesium.Cesium3DTileset({
+            url: 'https://raw.githubusercontent.com/Yashitha-Reddy/json/main/Production_6.json' // Update with your JSON file URL
+        });
+
+        viewer.scene.primitives.add(tileset);
+
+        // Zoom to the tileset when ready
+        tileset.readyPromise
+            .then(function() {
+                viewer.zoomTo(tileset);
+            })
+            .catch(function(error) {
+                console.error('Error loading tileset:', error);
+            });
+
+        // Measurement Tool
+        let activeMeasurement = false;
+        let handler;
+        const positions = [];
+        let polylineEntity;
+        const measurementResultDiv = document.getElementById('measurementResult');
+        const entities = [];
+
+        // Function to start measurement
+        document.getElementById('startMeasurement').onclick = function() {
+            if (activeMeasurement) return; // Prevent multiple measurements at the same time
+            activeMeasurement = true;
+            measurementResultDiv.innerHTML = '';
+            positions.length = 0;
+
+            handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+            handler.setInputAction(function(click) {
+                const pickedPosition = viewer.scene.pickPosition(click.position);
+                if (Cesium.defined(pickedPosition)) {
+                    positions.push(pickedPosition);
+
+                    // Add a point for the clicked position
+                    const pointEntity = viewer.entities.add({
+                        position: pickedPosition,
+                        point: { pixelSize: 10, color: Cesium.Color.RED }
+                    });
+                    entities.push(pointEntity);
+
+                    if (positions.length >= 2) {
+                        // Remove the previous polyline if it exists
+                        if (polylineEntity) viewer.entities.remove(polylineEntity);
+
+                        // Draw the polyline
+                        polylineEntity = viewer.entities.add({
+                            polyline: {
+                                positions: positions,
+                                width: 5,
+                                material: Cesium.Color.YELLOW
+                            }
+                        });
+                        entities.push(polylineEntity);
+
+                        // Calculate and display the distance
+                        const distance = Cesium.Cartesian3.distance(positions[0], positions[positions.length - 1]);
+                        measurementResultDiv.innerHTML = `Distance: ${distance.toFixed(2)} meters`;
+                    }
+                }
+            }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+            handler.setInputAction(function() {
+                // End measurement on right-click
+                handler.destroy();
+                activeMeasurement = false;
+            }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+        };
+
+        // Function to clear measurement
+        document.getElementById('clearMeasurement').onclick = function() {
+            // Remove all entities (points and polyline)
+            entities.forEach(function(entity) {
+                viewer.entities.remove(entity);
+            });
+            entities.length = 0;
+            positions.length = 0;
+            measurementResultDiv.innerHTML = '';
+            polylineEntity = null;
+        };
+    </script>
+</body>
+</html>
+

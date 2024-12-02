@@ -1,0 +1,257 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling the Map container */
+.leaflet-container {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a shadow to the navbar */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize footer */
+footer {
+    background-color: #333;
+    color: white;
+}
+
+/* Button hover effect */
+button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+
+/* Footer Text Styling */
+footer p {
+    font-size: 14px;
+}
+
+/* App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Styling the Map container */
+.leaflet-container {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a shadow to the navbar */
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize footer */
+footer {
+  background-color: #333;
+  color: white;
+}
+
+/* Button hover effect */
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+/* Footer Text Styling */
+footer p {
+  font-size: 14px;
+}
+
+/* Custom navbar style for small size */
+.navbar-sm {
+  padding: 8px 10px; /* Reduce padding for smaller navbar */
+}
+
+.navbar-sm .navbar-brand {
+  font-size: 18px; /* Smaller text for brand */
+}
+
+.navbar-sm .navbar-nav .nav-link {
+  font-size: 14px; /* Smaller text for nav links */
+}
+
+/* Custom button inside navbar */
+button {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+/* Sidebar styling for layer categories */
+.layer-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 250px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Button styles for parent categories */
+.layer-container .category-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.layer-container .category-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Dropdown menu for subcategories */
+.layer-container .dropdown-menu {
+    display: block;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: none;
+    max-height: 200px; /* Add scrolling for large lists */
+    overflow-y: auto;
+}
+
+/* Individual subcategory items */
+.layer-container .dropdown-item {
+    margin-bottom: 8px;
+}
+
+.layer-container .form-check-label {
+    font-size: 13px;
+    color: #333;
+}
+
+/* Checkbox styles */
+.layer-container .form-check-input {
+    cursor: pointer;
+}
+
+/* Add hover effect for dropdown items */
+.layer-container .dropdown-item:hover {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+
+/* Footer styles for better visibility */
+footer {
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5;
+}
+.layer-box {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 250px;
+  max-height: 80%;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.layer-box h5 {
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.layer-category {
+  margin-bottom: 10px;
+}
+
+.category-btn {
+  background-color: #171f29;
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.category-btn:hover {
+  background-color: #0056b3;
+}
+
+.layer-dropdown {
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+}
+
+.layer-item {
+  margin-bottom: 5px;
+}
