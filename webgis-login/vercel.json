@@ -1,0 +1,19 @@
+{
+    "builds": [
+      {
+        "src": "webgis-login-ui/build/**/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "webgis-login/server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/webgis-login-ui/build/$1"
+      }
+    ]
+  }
+  

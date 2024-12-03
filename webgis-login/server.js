@@ -21,10 +21,11 @@ const client = new Client({
     port: 5432, // Default PostgreSQL port
     ssl: {
       rejectUnauthorized: false, // Disable SSL verification if required
+      sslmode: 'require', 
     },
   });
 
-  
+
 client.connect();
 
 // Root route
@@ -90,7 +91,8 @@ app.get('/geojson/layers', async (req, res) => {
 });
 
 // Start the server
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
