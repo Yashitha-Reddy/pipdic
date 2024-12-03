@@ -14,13 +14,17 @@ const PASSWORD = '1234';
 
 // PostgreSQL client setup
 const client = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'webgis', // Your database name
-  password: '1234', // Your PostgreSQL password
-  port: 5432, // Default PostgreSQL port
-});
+    user: 'postgres', // Your RDS master username
+    host: 'database-1.crwqygwa2tl6.us-east-1.rds.amazonaws.com', // Your RDS endpoint
+    database: 'webgis', // Your database name
+    password: 'Plasicard1', // Your RDS password
+    port: 5432, // Default PostgreSQL port
+    ssl: {
+      rejectUnauthorized: false, // Disable SSL verification if required
+    },
+  });
 
+  
 client.connect();
 
 // Root route
