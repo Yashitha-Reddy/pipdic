@@ -1,26 +1,19 @@
 {
-  "builds": [
-    {
-      "src": "webgis-login-ui/build/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "webgis-login/server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/indexx.html",
-      "dest": "/webgis-login-ui/public/indexx.html"
-    },
-    {
-      "src": "/3d-model",
-      "dest": "/webgis-login-ui/public/indexx.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/webgis-login-ui/build/index.html"
-    }
-  ]
-}
+    "builds": [
+      {
+        "src": "webgis-login-ui/build/**/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "webgis-login/server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/webgis-login-ui/build/$1"
+      }
+    ]
+  }
+  
