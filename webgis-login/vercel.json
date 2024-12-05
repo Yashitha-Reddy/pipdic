@@ -11,16 +11,16 @@
   ],
   "routes": [
     {
-      "src": "/indexx.html", 
-      "dest": "/webgis-login-ui/build/indexx.html" 
+      "src": "/indexx.html",
+      "dest": "/webgis-login-ui/public/indexx.html"
     },
     {
-      "src": "/api/(.*)", 
-      "dest": "/webgis-login/server.js" 
+      "src": "/3d-model",
+      "dest": "/webgis-login-ui/public/indexx.html"
     },
     {
-      "src": "/(.*)", 
-      "dest": "/webgis-login-ui/build/index.html" 
+      "src": "/(.*)",
+      "dest": "/webgis-login-ui/build/index.html"
     }
   ]
 }
