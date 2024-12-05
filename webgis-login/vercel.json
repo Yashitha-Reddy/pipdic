@@ -1,19 +1,26 @@
 {
-    "builds": [
-      {
-        "src": "webgis-login-ui/build/**/*",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "webgis-login/server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/webgis-login-ui/build/$1"
-      }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "webgis-login-ui/build/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "webgis-login/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/indexx.html", 
+      "dest": "/webgis-login-ui/build/indexx.html" 
+    },
+    {
+      "src": "/api/(.*)", 
+      "dest": "/webgis-login/server.js" 
+    },
+    {
+      "src": "/(.*)", 
+      "dest": "/webgis-login-ui/build/index.html" 
+    }
+  ]
+}
