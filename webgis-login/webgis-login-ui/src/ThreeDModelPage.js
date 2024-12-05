@@ -8,7 +8,7 @@ const ThreeDModelPage = () => {
       <div style={{ width: '100%', height: '100vh' }}>
         <iframe
           
-          src="/indexx.html" // Points to the indexx.html file in the public folder
+          src="https://webgis-login.vercel.app/indexx.html" // Points to the indexx.html file in the public folder
           width="100%"
           height="100%"
           style={{ border: 'none' }}
